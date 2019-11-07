@@ -59,8 +59,21 @@ function each(coll, f) {
   //wordLengths("hello its me") // [5,3,2]
   
   function wordLengths(str) {
-      // TODO: your code here 
-  }
+    var lengths = [];  // push length to this empty arr
+    var arrString = str.split(' '); // split str by space in arr 
+    for(var i = 0; i < arrString.length; i++) {
+      // return length of srting 
+         lengths.push(arrString[i].length);
+       }
+      return lengths;
+     }
+      /* with each function ...
+      // var lengths = [];
+      // var arrString = str.split(' ');
+      // return each(arrString, function(element,i){
+      //    return  element.length;
+      //  })
+
   
   //=============================================================================
   /*                                  Q2                                    */
@@ -72,8 +85,22 @@ function each(coll, f) {
   // countOccurrences("hello, world!", "l"); // 3
   
   function countOccurrences(string, character) {
-      // your code is here
+    var arr = string.split('');
+    var count = 0;
+     return filter(arr,function(element,i){
+           element === character
+           return element.length;
+     })
   }
+  // or 
+    var arr = string.split('');
+    var count = 0;
+    return each(arr, function(element, i){
+        if(element === character){
+          count = count + 1;
+        }
+        return count;
+    })
   
   //=============================================================================
   /*                                  Q3                                    */
@@ -84,7 +111,9 @@ function each(coll, f) {
   // wordsLongerThanThree("Hello Mad World") //["Hello", "World"]
   
   function wordsLongerThanThree(str) {
-      // TODO: your code here 
+      return filter(str,function(string){
+        return string.length > 3 ;
+      });
   }
   
   //=============================================================================
@@ -99,15 +128,19 @@ function each(coll, f) {
   //repeatString('dog', 3); // => 'dog' + 'dog' + 'dog' => 'dogdogdog'
   
   function repeatString(str, count) { 
-   // TODO: your code here 
-  } 
+     if(count === 0){
+        return ''; // stop condetion
+     }
+        return str + repeatString(str, count-1);
+   } 
    
   
   //=============================================================================
   /*                                  Q5                                       */
   //=============================================================================
   /*
-   using closures create a function called makePizza that has the following properties and methods
+   using closures create a function called makePizza that has the
+   following properties and methods
    crust a property represented by a string. ex "thin","thick". 
    size a property represented by a string. ex "M","L".
    numberOfSlice a property that hold the number of slice, ex: 8
@@ -129,23 +162,38 @@ function each(coll, f) {
   // pizza.eatSlice();
   
   // Write your code here .....
-  
+function makePizza(crust,size,numberOfSlice) {
+     var addIngredients = function(string){
+          return string;
+       }
+       return addIngredients ;
+     }
+   //  },
+   //  var  bakePizza = function(){
+
+   //  },
+   //  var  eatSlice = function(){
+
+   //  }
+   //  return addIngredients;
+   // }
+
   //=============================================================================
   /*                                  Q6                                      */
   //=============================================================================
   /*
   Create a ReadingList class by using OOP concept, where:
   Your class should has:
-  "read" for the number of books that finish reading
+  "read" for the number of books that finish reading;
   "unRead" for the number of books that still not read
   "toRead" array for the books names that want to read in the future
   "currentRead" for the name of the book that is reading currently
   "readBooks" Array of the names of books that finish read
-  "AddBook" function that:
+   "AddBook" function that:
   a- Accept the book name as parameter
   b- Add the new book to "toRead" array
   c- Increment the number of the unread books.
-  "finishCurrentBook" function that:
+   "finishCurrentBook" function that:
   a- Add the "currentRead" to the "readBooks" array
   b- Increment the "read" books
   c- Change the "currentRead" to be the first book from "toRead" array
@@ -155,12 +203,48 @@ function each(coll, f) {
   // Now, to make sure that you are actually reading, make a comment below this and type: Yes I am
   
   // Write your code here .....
-  
+function ReadingList(){
+  var readList = {};
+      readList.book = '';
+      readList.read =  undefined;
+      readList.unRead = undefined;
+      readList.currentRead = undefined;
+      readList.toRead = [];
+      readList.readBooks = [];
+      // readList.finishCurrentBook = finishCurrentBook ;
+      readList.addBook = addBook; // function
+
+    return readList ;
+  }
+  // first Add book to do other function and to set reading book.
+  var addBook = function(book) {
+      this.book = this.book ; 
+     return toRead.push(this.book);
+      
+  }
+  var finishCurrentBook = function() {
+      if( currentRead === undefined) {
+        return 'there is no current book yet !';
+      } 
+      for(var i = 0; i < toRead.length; i ++){
+      if(toRead[i].length > 1 ) {
+        // the current book is sub[0];
+        // the first book in array will be read
+        // toRead[0] = 'read'; // after push;
+        // and next = toRead[i+1];
+        // and future = toRead[i+2];
+        // if ()
+     }
+      }
+  }
+
   //=============================================================================
   /*                                  Q7                                       */
   //=============================================================================
-  //Using closures create makeSafe Function that accepts an initial integer value to specify the storage size limit
-  //makeSafe should contain addItem function that accepts two parameters the item and the itemSize as Strings
+  // Using closures create makeSafe Function that accepts an 
+  // initial integer value to specify the storage size limit
+  // makeSafe should contain addItem function that accepts two 
+  // parameters the item and the itemSize as Strings
   //itemSize should be either "big", "medium" and "small"
   //big sized items will hold 3 slots in the storage
   //medium sized items will hold 2 slots in the storage
@@ -168,14 +252,19 @@ function each(coll, f) {
   //return "Can't fit" if you try to add an item that exceeds the storage size limit
   //when the safe is full return a string representing all the items that are in the safe
   //Example:
-  //  var safe = makeSafe(5)
+  //  var safe = makeSafe(5);
   //  safe('watch','small')
   //  safe('gold-bar','big')
   //  safe('silver-bar','big') => "Can't fit"
   //  safe('money','small') => "watch gold-bar money"
   
   // Write your code here .....
-  
+   function makeSafe(init){
+    var value = init ;
+    return function(item, itemSize){
+
+    }
+   }
   //=============================================================================
   /*                                  Q8                                       */
   //=============================================================================
@@ -184,7 +273,8 @@ function each(coll, f) {
   //Add Two text input fields, one with a placeholder input, and another with color
   //Add a button below them and an empty unordered list below the button
   //Create 3 CSS classes (red, yellow, blue)
-  //Create a javascript function that adds an item list to the unordered list
+  //Create a javascript function that adds an item
+  // list to the unordered list
   //If the color value is red, yellow or blue
   //Add the CSS class to the item accordingly
   //Do not add a list item if the color value is non of the colors
@@ -216,10 +306,24 @@ function each(coll, f) {
   //================================================================================
   // Theoretical questions.
   // 1- In your own words,Why do we use Closures ?
-  
+       /* clouser function its insteds of functions
+          to do dry code , whit out repaeting 
+          and for encapsulation
+     */ 
   // 2- In OOP, what does "this" refer to ?
+       // this refer to the varibal 
+        // var b = class();
+       //  b.exapl();
+       // this refer to b;
   
   // 3- What is jQuery?
-  
+    // called thired library ..
+    // library using with javascript
+
   // 4- what is the diffrence between Closure's methods and The OOP's methods?
-  
+       // Closure's methods
+           
+       // oop methods
+    
+
+
